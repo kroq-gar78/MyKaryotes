@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=MyKaryotes
+Icon=~/MyKaryotes/graphics/icon_48x48.png
+Exec=python ~/MyKaryotes/mykaryotes.py
+Categories=Application;Game;
