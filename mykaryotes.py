@@ -82,7 +82,7 @@ while 1:
   # Update mouse position and buttons
   mouse_button = 0
   for event in pygame.event.get():
-    # Check if we qit yet.
+    # Check if we quit yet.
     if event.type == pygame.QUIT:
       pygame.quit()
       sys.exit()
@@ -102,11 +102,9 @@ while 1:
   # Game object updates
   for w in walls:
     w.update(width, height)
-    screen.blit(w.image, w.rect)
   
   for c in cells:
     c.update(width, height)
-    screen.blit(c.image, c.rect)
   
   # Drawing
   screen.fill(black)
