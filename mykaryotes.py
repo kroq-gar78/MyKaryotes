@@ -121,11 +121,17 @@ while 1:
   fpsRect.topleft = rect_panel_bottom.topleft
   screen.blit(fpsSurface, fpsRect) 
   
+  for w in walls:
+    screen.blit(w.image, w.rect)
+  
+  for c in cells:
+    screen.blit(c.image, c.rect)
+  
   for b in left_buttons:
     screen.blit(b.image, b.rect)
   
   for b in right_buttons:
-    b.update(mouse_x, mouse_y, mouse_button)
+    screen.blit(b.image, b.rect)
   
   pygame.display.update()
   fpsClock.tick(30)
