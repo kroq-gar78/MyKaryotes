@@ -72,7 +72,7 @@ for location, button_size, button_type in [([0, 0], ButtonSize.Large, ButtonType
 
 for location, button_size, button_type in [([width - 32 * 1, 0], ButtonSize.Small, ButtonType.Quit),
                                            ([width - 32 * 2, 0], ButtonSize.Small, ButtonType.Restart),
-                                           ([width - 32 * 3, 0], ButtonSize.Small, ButtonType.Run),
+                                           ([width - 32 * 3, 0], ButtonSize.Small, ButtonType.Pause),
                                            ([width - 32 * 4, 0], ButtonSize.Small, ButtonType.Options),
                                            ([width - 32 * 5, 0], ButtonSize.Small, ButtonType.Help)]:
   right_buttons.append(Button(location, button_size, button_type))
