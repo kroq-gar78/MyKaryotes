@@ -50,7 +50,7 @@ background = background.convert()
 bkg_rect = background.get_rect()
 bkg_rect.topleft = (0, 64)
 
-# Initial objects.
+# Initialize objects.
 cells = []
 for color, size, location, speed in [([0, 255, 0], 0.50, [64, 128], [0.0, 2.0]),
                                      ([0, 255, 0], 0.25, [width / 2, height / 2], [3.0, 0.0])]:
@@ -96,15 +96,23 @@ while 1:
   for b in left_buttons:
     b.update(mouse_x, mouse_y, mouse_button)
   
+  paused = False
   for b in right_buttons:
     b.update(mouse_x, mouse_y, mouse_button)
+    # this should be updated in the button itself, not here
+    if b.button_type == ButtonType.Run:
+      paused = True
+    elif b.button_type == ButtonType.Pause:
+      paused = False
   
   # Game object updates
-  for w in walls:
-    w.update(width, height)
-  
-  for c in cells:
-    c.update(width, height)
+  # if paused, don't update
+  if not paused:
+    for w in walls:
+      w.update(width, height)
+    
+    for c in cells:
+      c.update(width, height)
   
   # Drawing
   screen.fill(black)
