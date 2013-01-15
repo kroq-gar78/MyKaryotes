@@ -16,6 +16,7 @@
 # along with MyKaryotes.  If not, see <http://www.gnu.org/licenses/>.
 
 import sys, pygame
+from pygame.locals import *
 from cells import Cell
 from walls import Wall
 from buttons import ButtonSize, ButtonType, Button
@@ -78,9 +79,10 @@ for location, button_size, button_type in [([width - 32 * 1, 0], ButtonSize.Smal
 
 # Main game loop.
 while 1:
-  # Check if we quit yet.
+  # Update mouse position and buttons
   mouse_button = 0
   for event in pygame.event.get():
+    # Check if we qit yet.
     if event.type == pygame.QUIT:
       pygame.quit()
       sys.exit()
@@ -90,10 +92,14 @@ while 1:
       mouse_x, mouse_y = event.pos
       mouse_button = event.button
   
-  # Drawing and game object updates.
-  screen.fill(black)
-  screen.blit(background, bkg_rect)
+  # Menubar button updates
+  for b in left_buttons:
+    b.update(mouse_x, mouse_y, mouse_button)
   
+  for b in right_buttons:
+    b.update(mouse_x, mouse_y, mouse_button)
+  
+  # Game object updates
   for w in walls:
     w.update(width, height)
     screen.blit(w.image, w.rect)
@@ -101,6 +107,10 @@ while 1:
   for c in cells:
     c.update(width, height)
     screen.blit(c.image, c.rect)
+  
+  # Drawing
+  screen.fill(black)
+  screen.blit(background, bkg_rect)
   
   screen.blit(panel_top, rect_panel_top)
   screen.blit(panel_bottom, rect_panel_bottom)
@@ -112,12 +122,10 @@ while 1:
   screen.blit(fpsSurface, fpsRect) 
   
   for b in left_buttons:
-    b.update(mouse_x, mouse_y, mouse_button)
     screen.blit(b.image, b.rect)
   
   for b in right_buttons:
     b.update(mouse_x, mouse_y, mouse_button)
-    screen.blit(b.image, b.rect)
   
   pygame.display.update()
   fpsClock.tick(30)
